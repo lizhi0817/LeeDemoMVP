@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidAppX</string>
+
+    <string name="utils_exception_parsing_exception">解析异常</string>
+    <string name="base_activity_exit">再按一次退出程序</string>
+    <string name="not_net_text">网络连接不可用</string>
+
+
+
+
+</resources>
