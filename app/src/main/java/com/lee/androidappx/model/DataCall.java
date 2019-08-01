@@ -9,7 +9,7 @@ import com.lee.androidappx.core.exception.ApiException;
  */
 public interface DataCall<T> {
 
-    void onSuccess(T data);
+    void onSuccess(T result);
 
     void onFaild(ApiException e);
 }

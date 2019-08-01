@@ -1,11 +1,15 @@
 <resources>
-    <string name="app_name">AndroidAppX</string>
+    <string name="app_name">安卓测试架构</string>
 
-    <string name="utils_exception_parsing_exception">解析异常</string>
-    <string name="base_activity_exit">再按一次退出程序</string>
-    <string name="not_net_text">网络连接不可用</string>
+    <string name="utils_exception_parsing_exception" translatable="true">解析异常</string>
+    <string name="base_activity_exit" translatable="true">再按一次退出程序</string>
+    <string name="not_net_text" translatable="true">网络连接不可用</string>
 
-
-
+    <string name="login_phone_et" translatable="true">请输入手机号</string>
+    <string name="login_pwd_et" translatable="true">请输入密码</string>
+    <string name="login_fast_registered" translatable="true">快速注册</string>
+    <string name="login_login_bt" translatable="true">登录</string>
+    <string name="login_correct_phone" translatable="true">请输入正确的手机号</string>
+    <string name="login_correct_pwd" translatable="true">请输入密码</string>
 
 </resources>

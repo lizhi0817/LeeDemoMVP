@@ -24,7 +24,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void destoryData() {
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void destroyData() {
 
     }
 

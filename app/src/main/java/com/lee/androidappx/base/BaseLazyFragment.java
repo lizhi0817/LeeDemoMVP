@@ -29,6 +29,23 @@ public abstract class BaseLazyFragment extends Fragment {
         return setLayoutView(inflater, container, savedInstanceState);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isViewCreated = true;
+        lazyLoad();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //页面销毁,恢复标记
+        isViewCreated = false;
+        isUIVisible = false;
+        LogUtils.d(mTextviewContent + "销毁了");
+    }
+
     /**
      * 设置布局
      *
@@ -38,14 +55,6 @@ public abstract class BaseLazyFragment extends Fragment {
      */
     protected abstract View setLayoutView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        isViewCreated = true;
-        lazyLoad();
-
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -73,17 +82,6 @@ public abstract class BaseLazyFragment extends Fragment {
 
 
     protected abstract void loadData();
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        //页面销毁,恢复标记
-        isViewCreated = false;
-        isUIVisible = false;
-
-        LogUtils.d(mTextviewContent + "销毁了");
-    }
 
 
 }

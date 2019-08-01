@@ -18,7 +18,7 @@
         android:id="@+id/tv_warring"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/iv_warring"
+        android:layout_toEndOf="@id/iv_warring"
         android:gravity="center_vertical"
         android:text="@string/not_net_text" />
 

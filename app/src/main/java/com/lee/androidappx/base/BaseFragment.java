@@ -48,7 +48,7 @@ public abstract class BaseFragment extends Fragment {
      *
      * @param inflater
      * @param container
-     * @return
+     * @param savedInstanceState
      */
     public abstract View setLayoutView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 

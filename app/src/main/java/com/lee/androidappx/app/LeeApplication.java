@@ -2,6 +2,7 @@ package com.lee.androidappx.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.CrashUtils;
@@ -9,12 +10,12 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.ByteConstants;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lee.androidappx.utils.ScreenAdapter;
 import com.squareup.leakcanary.LeakCanary;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -33,23 +34,44 @@ public class LeeApplication extends Application {
 
     private Boolean isDebug;
     private static int MAX_MEM = 30 * ByteConstants.MB;
-
+    //屏幕适配的基准
+    private static final int MATCH_BASE_WIDTH = 0;
+    private static final int MATCH_BASE_HEIGHT = 1;
+    //适配单位
+    private static final int MATCH_UNIT_DP = 0;
+    private static final int MATCH_UNIT_PT = 1;
+    //适配尺寸
+    private static final float designSize = 360;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        File file = new File(Environment.getExternalStorageDirectory(), "app2.trace");
+        LogUtils.d(file.getAbsolutePath());
+        //把分析结果存放在路径
+//        Debug.startMethodTracing(file.getAbsolutePath());
         //初始化屏幕适配
-        ScreenAdapter.setup(this);
+        ScreenAdapter.register(this, designSize, MATCH_BASE_WIDTH, MATCH_UNIT_DP);
         //初始化Fresco
-        Fresco.initialize(this, getConfigureCaches(this));
-        //logutils设置
-        initLogUtils();
-        //初始化内存泄露检查工具
-        initLeakCanary();
-        //崩溃工具相关
-        initCrash();
-        //初始化SP
-        mSpUtils = SPUtils.getInstance("LeeSP.xml");
+//        Fresco.initialize(this, getConfigureCaches(this));
+
+
+        new Thread() {
+            @Override
+            public void run() {
+                //logutils设置
+                initLogUtils();
+                //初始化内存泄露检查工具
+                initLeakCanary();
+                //崩溃工具相关
+                initCrash();
+                //初始化SP
+                mSpUtils = SPUtils.getInstance("LeeSP.xml");
+            }
+        }.start();
+
+//        Debug.stopMethodTracing();
     }
 
     // 内存泄露检查工具
@@ -93,7 +115,7 @@ public class LeeApplication extends Application {
                 .setFileFilter(LogUtils.V)// log 文件过滤器，和 logcat 过滤器同理，默认 Verbose
                 .setStackDeep(1)// log 栈深度，默认为 1
                 .setStackOffset(0)// 设置栈偏移，比如二次封装的话就需要设置，默认为 0
-                .setSaveDays(3)// 设置日志可保留天数，默认为 -1 表示无限时长
+                .setSaveDays(1)// 设置日志可保留天数，默认为 -1 表示无限时长
                 // 新增 ArrayList 格式化器，默认已支持 Array, Throwable, Bundle, Intent 的格式化输出
                 .addFormatter(new LogUtils.IFormatter<ArrayList>() {
                     @Override
@@ -103,7 +125,6 @@ public class LeeApplication extends Application {
                 })
                 .setFileWriter(null);
         LogUtils.i(config.toString());
-
 
     }
 
