@@ -42,8 +42,6 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
     api 'com.squareup.okhttp3:logging-interceptor:4.0.1'
     api 'com.squareup.retrofit2:converter-gson:2.6.1'
-    //管理权限类
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
 
     //butterKnife
     api 'com.jakewharton:butterknife:8.8.1'
