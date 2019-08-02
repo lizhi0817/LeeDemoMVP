@@ -52,7 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         BusUtils.register(this);
     }
 
-    //更改应用程序字体大小
     @Override
     protected void onResume() {
         super.onResume();
