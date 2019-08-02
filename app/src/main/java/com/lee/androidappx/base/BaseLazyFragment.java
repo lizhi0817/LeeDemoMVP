@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.lee.androidappx.MainActivity;
 
 /**
@@ -16,7 +15,6 @@ import com.lee.androidappx.MainActivity;
  * Description  :    Fragment懒加载
  */
 public abstract class BaseLazyFragment extends Fragment {
-    private String mTextviewContent;
     private MainActivity mMainActivity;
 
     //Fragment的View加载完毕的标记
@@ -43,7 +41,6 @@ public abstract class BaseLazyFragment extends Fragment {
         //页面销毁,恢复标记
         isViewCreated = false;
         isUIVisible = false;
-        LogUtils.d(mTextviewContent + "销毁了");
     }
 
     /**
@@ -76,7 +73,6 @@ public abstract class BaseLazyFragment extends Fragment {
             isViewCreated = false;
             isUIVisible = false;
 
-            LogUtils.d(mTextviewContent + "可见,加载数据");
         }
     }
 

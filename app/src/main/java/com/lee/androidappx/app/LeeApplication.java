@@ -2,7 +2,6 @@ package com.lee.androidappx.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Environment;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.CrashUtils;
@@ -10,12 +9,12 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.ByteConstants;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lee.androidappx.utils.ScreenAdapter;
 import com.squareup.leakcanary.LeakCanary;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -47,14 +46,14 @@ public class LeeApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        File file = new File(Environment.getExternalStorageDirectory(), "app2.trace");
-        LogUtils.d(file.getAbsolutePath());
+//        File file = new File(Environment.getExternalStorageDirectory(), "app2.trace");
+//        LogUtils.d(file.getAbsolutePath());
         //把分析结果存放在路径
 //        Debug.startMethodTracing(file.getAbsolutePath());
         //初始化屏幕适配
         ScreenAdapter.register(this, designSize, MATCH_BASE_WIDTH, MATCH_UNIT_DP);
         //初始化Fresco
-//        Fresco.initialize(this, getConfigureCaches(this));
+        Fresco.initialize(this, getConfigureCaches(this));
 
 
         new Thread() {
